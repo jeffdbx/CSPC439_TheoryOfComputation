@@ -193,6 +193,6 @@ std::string Grammar::GetRule(const std::string &variable)
 	        break;
         }
     }
-return "";
+    return "";
 }
 
