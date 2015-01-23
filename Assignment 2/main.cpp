@@ -7,15 +7,15 @@
 // The general algorithm for accomplishing this is as follows:
 // 1. Initialize the current string to be START.
 // 2. While the current string contains upper case letters:
-//	    (a) Identify the variable names in the current string(there must be at least
-//		one).
+//      (a) Identify the variable names in the current string(there must be at least
+//      one).
 //
-//		(b) Choose one name to expand randomly, where each variable name instance
-//		is equally likely to be chosen.
+//      (b) Choose one name to expand randomly, where each variable name instance
+//      is equally likely to be chosen.
 //
-//		(c) Find the variable’s rules in the grammar. Choose one of the rules to expand
-//		randomly, where again each of the variable’s rules are equally likely to be
-//		chosen.
+//      (c) Find the variable’s rules in the grammar. Choose one of the rules to expand
+//      randomly, where again each of the variable’s rules are equally likely to be
+//      chosen.
 //
 // 3. Return the current string, which contains no upper case letters.
 //
@@ -26,19 +26,19 @@
 
 int main(int argc, char** argv)
 {
-	if (argc < 2)
-	{
+    if (argc < 2)
+    {
         std::cerr << "Usage: " << argv[0] << " <filename>" << std::endl;
-		return EXIT_FAILURE;
-	}
+        return EXIT_FAILURE;
+    }
 
     std::string file_name(argv[1]);
     
-	Grammar grammar;
+    Grammar grammar;
     grammar.LoadGrammar(file_name);
 
     std::cout << "FINAL STRING:\n" << grammar.RandomizedDerivation() << std::endl;
 
-	return EXIT_SUCCESS;
+    return EXIT_SUCCESS;
 }
 

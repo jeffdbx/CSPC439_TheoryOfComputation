@@ -39,70 +39,70 @@ void Grammar::LoadGrammar(const std::string &file_name)
 std::string Grammar::RandomizedDerivation()
 {
     ParseVariablesAndRules(m_file_content);
-	// Grab "START" from the variables vector.
-	if (!m_variables.empty())
-	{
-		auto i = m_variables.begin();
-		m_current_string = (*i)->m_name;
-	}
-	std::string temp = "";
+    // Grab "START" from the variables vector.
+    if (!m_variables.empty())
+    {
+        auto i = m_variables.begin();
+        m_current_string = (*i)->m_name;
+    }
+    std::string temp = "";
 
-	// Keep looping until all variables have been derived.  Every variable found within the current string are stored 
-	// in the 'm_variable_references' vector.  Ideally this would store custom objects, but I store them as string
-	// objects instead.
-	while (AnyCapitalLettersLeft(m_current_string))
-	{
-		temp = "";
-		for (unsigned i = 0; i < m_current_string.size(); i++)
-		{
-			if (isupper(m_current_string.at(i)))
-			{
-				temp += m_current_string.at(i);
-			}
-			// This takes care of variables that are not at the end of the sentence (i.e. "CONTENTS on ...")
-			if (!isupper(m_current_string.at(i)))
-			{
-				if (temp != "")
-				{
-					m_variable_references.push_back(temp);
-				}
-				temp = "";
-			}
-		}
-		// This takes care of variables at the end of a sentence (i.e. "... BREAD", or "START")
-		if (temp != "")
-		{
-			m_variable_references.push_back(temp);
-		}
+    // Keep looping until all variables have been derived.  Every variable found within the current string are stored 
+    // in the 'm_variable_references' vector.  Ideally this would store custom objects, but I store them as string
+    // objects instead.
+    while (AnyCapitalLettersLeft(m_current_string))
+    {
+        temp = "";
+        for (unsigned i = 0; i < m_current_string.size(); i++)
+        {
+            if (isupper(m_current_string.at(i)))
+            {
+	            temp += m_current_string.at(i);
+            }
+            // This takes care of variables that are not at the end of the sentence (i.e. "CONTENTS on ...")
+            if (!isupper(m_current_string.at(i)))
+            {
+	            if (temp != "")
+	            {
+		            m_variable_references.push_back(temp);
+	            }
+	            temp = "";
+            }
+        }
+        // This takes care of variables at the end of a sentence (i.e. "... BREAD", or "START")
+        if (temp != "")
+        {
+            m_variable_references.push_back(temp);
+        }
 
-		// This loop derives all of the variables that were found in the current string.
-		while (!m_variable_references.empty())
-		{
+        // This loop derives all of the variables that were found in the current string.
+        while (!m_variable_references.empty())
+        {
             srand((unsigned int)time(NULL));
-			// Randomly choose which variable to derive.
-			int rand_index = rand() % m_variable_references.size();
-			auto iter = m_variable_references.at(rand_index);
+            // Randomly choose which variable to derive.
+            int rand_index = rand() % m_variable_references.size();
+            auto iter = m_variable_references.at(rand_index);
 
-			std::cout << "in \"" << iter << "\" replacing \"" << iter << "\" with \"" << GetRule(iter) << "\"";
-			replace(m_current_string, iter, GetRule(iter));
-			std::cout << " to obtain \"" << m_current_string << "\"" << std::endl;
-			m_variable_references.erase(m_variable_references.begin() + rand_index);
-		}
-	}
-	return m_current_string;
+            std::cout << "in \"" << iter << "\" replacing \"" << iter << "\" with \"" << GetRule(iter) << "\"";
+            replace(m_current_string, iter, GetRule(iter));
+            std::cout << " to obtain \"" << m_current_string << "\"" << std::endl;
+            m_variable_references.erase(m_variable_references.begin() + rand_index);
+        }
+    }
+    return m_current_string;
 }
 
 // Prints all of the variables and their associated rules. This was used primarily for debugging purposes.
 void Grammar::PrintGrammar()
 {
-	if (m_variables.empty())
-	{
-		std::cout << "The grammar is empty." << std::endl;
-	}
-	for (auto variable_iter = m_variables.begin(); variable_iter != m_variables.end(); variable_iter++)
-	{
-		(*variable_iter)->PrintRules();
-	}
+    if (m_variables.empty())
+    {
+        std::cout << "The grammar is empty." << std::endl;
+    }
+    for (auto variable_iter = m_variables.begin(); variable_iter != m_variables.end(); variable_iter++)
+    {
+        (*variable_iter)->PrintRules();
+    }
 }
 
 // Parses all of the variables and grammar rules from the input file.
@@ -164,35 +164,35 @@ void Grammar::ParseVariablesAndRules(const std::string &m_file_content)
 // Determines if any capital letters are left in the string.
 bool Grammar::AnyCapitalLettersLeft(const std::string &s)
 {
-	for (auto iter = s.begin(); iter != s.end(); iter++)
-	{
-		if (isupper(*iter))
-			return true;
-	}
-	return false;
+    for (auto iter = s.begin(); iter != s.end(); iter++)
+    {
+	    if (isupper(*iter))
+		    return true;
+    }
+    return false;
 }
 
 // Replaces a substring, within a given string, with a different substring.
 bool Grammar::replace(std::string& str, const std::string& from, const std::string& to) {
-	size_t start_pos = str.find(from);
-	if (start_pos == std::string::npos)
-		return false;
-	str.replace(start_pos, from.length(), to);
-	return true;
+    size_t start_pos = str.find(from);
+    if (start_pos == std::string::npos)
+	    return false;
+    str.replace(start_pos, from.length(), to);
+    return true;
 }
 
 //  This function calls the variable's GetRule() member function, which in turn, 
 //  returns (randomly) one of its associated rules.
 std::string Grammar::GetRule(const std::string &variable)
 {
-	for (auto iter = m_variables.begin(); iter != m_variables.end(); iter++)
-	{
-		if ((*iter)->m_name == variable)
-		{
-			return (*iter)->GetRule();
-			break;
-		}
-	}
-	return "";
+    for (auto iter = m_variables.begin(); iter != m_variables.end(); iter++)
+    {
+        if ((*iter)->m_name == variable)
+        {
+	        return (*iter)->GetRule();
+	        break;
+        }
+    }
+return "";
 }
 
