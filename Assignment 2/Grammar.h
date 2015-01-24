@@ -15,7 +15,6 @@ public:
     //
     //  Reads the grammar from the input file and stores the content in a string.
     //  @param file_name: the name of the input file.
-    //  @param file_content: the content of the input file.
     //
     void LoadGrammar(const std::string &file_name);
 
@@ -44,6 +43,8 @@ private:
     //  ParseVariablesAndRules
     //
     //  Parses all of the variables and grammar rules from the input file.
+    //  @param m_file_name: the content of the input file. Explicitly passing a
+    //  private member in order to enforce const.
     //
     void ParseVariablesAndRules(const std::string &m_file_content);
 
@@ -66,7 +67,7 @@ private:
     //  Reference:
     //  http://stackoverflow.com/questions/3418231/replace-part-of-a-string-with-another-string
     //
-    bool replace(std::string& str, const std::string& from, const std::string& to);
+    bool replace(std::string &str, const std::string &from, const std::string &to);
 
     //  GetRule
     //
