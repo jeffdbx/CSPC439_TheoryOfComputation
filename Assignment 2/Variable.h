@@ -3,6 +3,8 @@
 #include <string>
 #include <vector>
 
+// This class should probably be abstracted away and nested within the Grammar class, 
+// but for debugging purposes, it was much easier to make everything public.
 class Variable
 {
 public:
