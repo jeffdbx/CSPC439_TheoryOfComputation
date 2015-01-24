@@ -1,5 +1,5 @@
 // Jeff Bohlin
-// CPSC 439 - Project 2
+// CPSC 439 - Assignment 2
 // October 27th, 2014
 //
 // This program derives strings randomly from a context free grammar(CFG) supplied as input.
