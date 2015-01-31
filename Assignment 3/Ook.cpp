@@ -65,27 +65,32 @@ void Ook::InterpretOok()
         // Ook? Ook. Decrement the data pointer.
         else if (program.at(m_intruction_ptr) == '?' && program.at(m_intruction_ptr + 1) == '.')
         {
-            m_current_byte--; m_intruction_ptr += 2;
+            m_current_byte--; 
+            m_intruction_ptr += 2;
         }
         // Ook. Ook. Increment the current byte.
         else if (program.at(m_intruction_ptr) == '.' && program.at(m_intruction_ptr + 1) == '.')
         {
-            (*m_current_byte)++; m_intruction_ptr += 2;
+            (*m_current_byte)++; 
+            m_intruction_ptr += 2;
         }
         // Ook! Ook! Decrement the current byte.
         else if (program.at(m_intruction_ptr) == '!' && program.at(m_intruction_ptr + 1) == '!')
         {
-            (*m_current_byte)--; m_intruction_ptr += 2;
+            (*m_current_byte)--; 
+            m_intruction_ptr += 2;
         }
         // Ook! Ook. Write the current byte to stdout.
         else if (program.at(m_intruction_ptr) == '!' && program.at(m_intruction_ptr + 1) == '.')
         {
-            std::cout << (*m_current_byte); m_intruction_ptr += 2;
+            std::cout << (*m_current_byte); 
+            m_intruction_ptr += 2;
         }
         // Ook. Ook! Read a char from stdin and overwrite the current byte with it.
         else if (program.at(m_intruction_ptr) == '.' && program.at(m_intruction_ptr + 1) == '!')
         {
-            std::cin >> (*m_current_byte); m_intruction_ptr += 2;
+            std::cin >> (*m_current_byte); 
+            m_intruction_ptr += 2;
         }
         // Ook! Ook? Start of a loop, "["
         else if (program.at(m_intruction_ptr) == '!' && program.at(m_intruction_ptr + 1) == '?')

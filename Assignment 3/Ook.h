@@ -36,7 +36,6 @@ public:
     ~Ook() {}
 
 private:
-
     // DisplayJumpTable
     //
     // Prints out the jump table to the console. (Used for debugging).
