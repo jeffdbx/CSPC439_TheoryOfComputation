@@ -19,17 +19,19 @@
 
 int main(int argc, char** argv)
 {
-    if (argc < 3)   // User must supply a filename and an int > 0
+    // User must supply a filename and an int > 0
+    if (argc < 3)   
     {
         std::cerr << "Usage: " << argv[0] << " <filename> <n>" << std::endl;
         return EXIT_FAILURE;
     }
 
     std::string file_name(argv[1]);
-    std::string temp_n(argv[2]);        // Convert c-array of "n" into a string temporarily
-    int n = stoi(temp_n);               // Convert string of "n" into its appropriate integer
+    std::string temp_n(argv[2]);
+    int n = stoi(temp_n);               
 
-    if (n < 0)                          // n is the number of iterations to run the simulation
+    // n is the number of iterations to run the simulation
+    if (n < 0)                          
     {
         std::cerr << "n must be greater than 0." << std::endl;
         return EXIT_FAILURE;

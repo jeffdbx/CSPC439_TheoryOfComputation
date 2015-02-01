@@ -21,7 +21,7 @@ void Conway::LoadSimulation(const std::string &file_name, const unsigned int &n_
     std::string trash;
     int x, y;
 
-    std::getline(fin, trash);	// Discard the title of the pattern.
+    std::getline(fin, trash);   // Discard the title of the pattern.
     while (fin >> x >> y) { coords.push_back(std::make_pair(x, y)); }
 
     fin.close();
@@ -52,8 +52,9 @@ void Conway::TranslatePoints(const std::vector<std::pair<int, int>> &coords, std
 {
     std::pair<int, int> min_x_y = GetMinXY(coords);
 
-    for (auto i : coords)	// C++11
-    {	// Subtract the smallest x and y values from each coordinate pair.  This places the origin at (0, 0).
+    for (auto i : coords)   // C++11
+    {   
+        // Subtract the smallest x and y values from each coordinate pair.  This places the origin at (0, 0).
         translated_coords.push_back(std::make_pair(i.first - min_x_y.first, i.second - min_x_y.second));
     }
 }
@@ -66,7 +67,8 @@ void Conway::LoadLifeGrid(const std::vector<std::pair<int, int>> &translated_coo
         //  Some of the Life patterns are too big for our static grid size,
         //  so we can check for that here. Otherwise an OOB error can occur.
         try
-        {	// Need to flip x (i.first) and y (i.second) here for some reason.
+        {   
+            // Need to flip x (i.first) and y (i.second) here for some reason.
             life_grid.at(i.second).at(i.first) = 'O';
         }
         catch (const std::out_of_range &e)
@@ -96,7 +98,7 @@ std::pair<int, int> Conway::GetMinXY(const std::vector<std::pair<int, int>> &coo
     min_x_y.first = min_x_y.second = 0;
 
     // Check each pair of x and y coordinates
-    for (auto i : coords)	// C++11
+    for (auto i : coords)   // C++11
     {
         if (i.first < min_x_y.first)   { min_x_y.first = i.first; }
         if (i.second < min_x_y.second) { min_x_y.second = i.second; }

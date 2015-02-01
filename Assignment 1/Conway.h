@@ -9,7 +9,6 @@
 class Conway
 {
 public:
-
     // Default ctor.
     Conway();
 
@@ -34,21 +33,12 @@ public:
     ~Conway() {}
 
 private:
-
-    // enum 'hack'.  The rows and cols would probably be better as arguments passed in on object instantiation,
-    // but for the purposes of this assignment I'll keep it as simple as possible.
-    enum { GRID_ROWS = 20, GRID_COLS = 60 };
-    std::vector<std::vector<char>> life_grid;
-    std::vector<std::pair<int, int>> coords, translated_coords;
-    unsigned int n;
-    bool simulation_loaded;
-
     //  TranslatePoints
     //
     //  Translates the raw x y LoadSimulation to have an origin at (0,0).
     //  @param coords: a vector of integer pairs that stores the raw x y LoadSimulation from the .lif file.
     //  @param translated_coords: a vector of integer pairs that stores the translated LoadSimulation.
-    //	
+    //  
     void TranslatePoints(const std::vector<std::pair<int, int>> &coords, std::vector<std::pair<int, int>> &translated_coords);
 
     //  LoadLifeGrid
@@ -100,6 +90,14 @@ private:
     //  @return: an bool value that represents if the cell is within bounds of the array or not.
     //
     bool InBounds(const int &row, const int &col);
+
+    // enum 'hack'.  The rows and cols would probably be better as arguments passed in on object instantiation,
+    // but for the purposes of this assignment I'll keep it as simple as possible.
+    enum { GRID_ROWS = 20, GRID_COLS = 60 };
+    std::vector<std::vector<char>> life_grid;
+    std::vector<std::pair<int, int>> coords, translated_coords;
+    unsigned int n;
+    bool simulation_loaded;
 };
 
 
